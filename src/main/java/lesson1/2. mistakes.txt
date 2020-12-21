@@ -1,0 +1,84 @@
+interface Moveable {
+    void move();
+}
+
+interface Stopable {
+    void stop();
+}
+
+// стоит использовать аннотации lombok и убрать геттеры и сеттеры
+abstract class Car { // добавить implements Moveable, Stopable и убрать у наследников, считаем, что любая машина может двигаться и останавливаться
+                     // но конечно это зависит от задания, если то, что у LightWeightCar нет интерфейса Stopable это не ошибка, тогда придется оставить как есть
+    public Engine engine; // тут необходимо заменить на private
+    private String color;
+    private String name;
+
+
+    protected void start() { // довольно странный разброс уровней доступа по методам получается, хотелось бы сделать public, как move и stop
+                             // но все зависит от конкретной реализации, может так и предполагается - выдать этот метод только наследникам
+                             // еще один вариант, это позволить решать вопрос с доступом наследникам и в случае необходимости переопределить метод
+        System.out.println("Car starting");
+    }
+
+    abstract void open(); // аналогично другим командам управления сделать public
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class LightWeightCar extends Car implements Moveable{ //убираем интерфейс.
+// Смотрим на то, что у всех классов тут уровень доступа default,
+// т.е. предполагается, что интерфейсы, абстрактный класс, наследники лежат в одном пакете.
+// И получается, что другой код программы тоже должен лежать в этом пакете, чтобы использовать эти классы, что довольно плохо.
+// Поэтому нужно этот класс сделать public
+
+    @Override
+    void open() { //тут соответственно делаем тоже public
+        System.out.println("Car is open");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Car is moving"); // одни и те же сообщения у всех наследников, поэтому как вариант можно сделать дефолтную реализацию в абстрактом классе
+                                             // но понятно, что в реальной программе никаких таких сообщений не будет и будет везде своя логика
+    }
+
+    // если, как ранее писал, считаем, что все машины будут Stopable, то тут добавить реализацию stop()
+
+}
+
+class Lorry extends Car, Moveable, Stopable{ // убираем интерфейсы, делаем public
+
+    // добавляем @Override, работать будет и без аннотации, но для понимания кода нужно добавить
+    public void move(){
+        System.out.println("Car is moving");
+    }
+
+    // добавляем @Override
+    public void stop(){
+        System.out.println("Car is stop");
+    }
+
+    // не хватает реализации метода open()
+}

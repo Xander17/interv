@@ -1,0 +1,58 @@
+исправленная версия
+
+interface Moveable {
+    void move();
+}
+
+interface Stopable {
+    void stop();
+}
+
+@Data
+abstract class Car implements Moveable, Stopable{
+    private Engine engine;
+    private String color;
+    private String name;
+
+    public void start() {
+        System.out.println("Car starting");
+    }
+
+    public abstract void open();
+}
+
+public class LightWeightCar extends Car{
+
+    @Override
+    public void open() {
+        System.out.println("LightWeightCar is open");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("LightWeightCar is moving");
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("LightWeightCar is stopping");
+    }
+}
+
+public class Lorry extends Car {
+
+    @Override
+    public void open() {
+        System.out.println("Lorry is open");
+    }
+
+    @Override
+    public void move() {
+        System.out.println("Lorry is moving");
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Lorry is stopping");
+    }
+}
