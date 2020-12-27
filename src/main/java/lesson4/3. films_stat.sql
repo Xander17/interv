@@ -1,3 +1,4 @@
+# статистика по фильмам
 select (if(f.id is null, 'Total', f.name)) as 'Film name',
        count(t.id)                         as 'Audience',
        count(t.id) / count(distinct s.id)  as 'Average audience',

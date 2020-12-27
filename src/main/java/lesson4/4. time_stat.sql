@@ -1,3 +1,4 @@
+# статистика по ценовым категориям
 select pc.name       as 'Price category',
        count(t.id)   as 'Audience',
        sum(pc.price) as 'Total gross'
