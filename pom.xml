@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lesson5</module>
+        <module>lesson6server</module>
     </modules>
 
     <properties>

@@ -1,3 +1,7 @@
 /.idea/
 /.gitignore
 /interv.iml
+/socketclient/socketclient.iml
+/lesson5/target/
+/target/
+/out/
