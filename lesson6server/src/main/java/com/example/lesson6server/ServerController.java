@@ -14,4 +14,9 @@ public class ServerController {
     public String post(@RequestBody String body) {
         return "posted " + body;
     }
+
+    @PostMapping
+    public String post(@RequestBody Object body) {
+        return "posted object " + body;
+    }
 }
